@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	// "github.com/aksuman05/grpc-calulator"
+	// "github.com/aksuman05/grpc-calulator/calculatorpb"
+	"github.com/aksuman05/grpc-calculator/tree/main/calculatorpb"
 	"google.golang.org/grpc"
 )
 
@@ -16,16 +17,16 @@ func main() {
 	}
 
 	defer conn.Close()
-	c := sumpb.NewSumClient(conn)
+	c := calculatorpb.NewSumClient(conn)
 
 	// numbers to add
-	num := sumpb.Numbers{
+	num := calculatorpb.Numbers{
 		A: 10,
 		B: 5,
 	}
 
 	// call Add service
-	res, err := c.Add(context.Background(), &sumpb.SumRequest{Numbers: &num})
+	res, err := c.Add(context.Background(), &calculatorpb.SumRequest{Numbers: &num})
 	if err != nil {
 		log.Fatalf("failed to call Add: %v", err)
 	}

@@ -5,7 +5,8 @@ import (
 	"log"
 	"net"
 
-	"github.com/aksuman05/grpc-calulator"
+	// "github.com/aksuman05/grpc-calulator/calculatorpb"
+	"github.com/aksuman05/grpc-calculator/tree/main/calculatorpb"
 	"google.golang.org/grpc"
 )
 
@@ -18,7 +19,7 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	sumpb.RegisterSumServer(s, &server{})
+	calculatorpb.RegisterSumServer(s, &server{})
 
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to start server %v", err)
@@ -27,8 +28,8 @@ func main() {
 }
 
 // Add returns sum of two integers
-func (*server) Add(ctx context.Context, req *sumpb.SumRequest) (*sumpb.SumResponse, error) {
+func (*server) Add(ctx context.Context, req *calculatorpb.SumRequest) (*calculatorpb.SumResponse, error) {
 	a, b := req.GetNumbers().GetA(), req.GetNumbers().GetB()
 	sum := a + b
-	return &sumpb.SumResponse{Result: sum}, nil
+	return &calculatorpb.SumResponse{Result: sum}, nil
 }
