@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/aksuman05/go-grpc-calulator"
+	// "github.com/aksuman05/grpc-calulator"
 	"google.golang.org/grpc"
 )
 
